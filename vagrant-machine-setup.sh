@@ -56,57 +56,6 @@ sudo apt-get -y install scala
 sudo apt-get -y install unzip
 
 ###############################################
-# Install NodeJS
-###############################################
-curl --silent --location https://deb.nodesource.com/setup_4.x | sudo bash -
-sudo apt-get -y install nodejs
-ln -s /usr/bin/nodejs /user/bin/node
-# Add node_modules to environment variables
-echo "export NODE_PATH=/usr/local/lib/node_modules" >> ~/.bashrc
-
-###############################################
-# Install NPM
-###############################################
-sudo apt-get -y install npm
-
-###############################################
-# Install CoffeeScript
-###############################################
-sudo npm install -g coffee-script
-
-###############################################
-# Install Bower
-###############################################
-sudo npm install -g bower
-
-###############################################
-# Install Sass
-###############################################
-sudo gem install sass
-
-###############################################
-# Install Redis
-# More info about it: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-redis
-###############################################
-echo "Download Redis..."
-wget http://download.redis.io/releases/redis-stable.tar.gz
-tar xzf redis-stable.tar.gz
-cd redis-stable
-make
-make test
-sudo make install
-cd utils
-sudo ./install_server.sh
-cd /home/vagrant/
-rm redis-stable.tar.gz
-echo "Redis done."
-
-###############################################
-# Install PostgreSQL
-###############################################
-sudo apt-get -y install postgresql postgresql-contrib postgresql-client-common postgresql-common
-
-###############################################
 # Install SBT
 ###############################################
 echo "Download SBT..."
@@ -119,33 +68,6 @@ rm sbt-$sbtVersion.deb
 echo "SBT done."
 # Use node as default JavaScript Engine
 echo "export SBT_OPTS=\"\$SBT_OPTS -Dsbt.jse.engineType=Node\"" >> ~/.bashrc
-
-###############################################
-# Install typesafe activator
-###############################################
-cd /home/vagrant
-echo "Download Typesafe Activator..."
-wget http://downloads.typesafe.com/typesafe-activator/$activatorVersion/typesafe-activator-$activatorVersion.zip
-unzip -d /home/vagrant typesafe-activator-$activatorVersion.zip
-rm typesafe-activator-$activatorVersion.zip
-echo "Typesafe Activator done."
-# Add activator to environment variables
-echo "export PATH=/home/vagrant/activator-dist-$activatorVersion/bin:\$PATH" >> ~/.bashrc
-
-###############################################
-# Reset bash
-###############################################
-source ~/.bashrc
-
-###############################################
-# Install MongDB
-###############################################
-echo "Download MongoDB..."
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
-echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
-sudo apt-get update
-sudo apt-get -y install mongodb-org
-echo "MongDB done."
 
 ###############################################
 # Reset bash
@@ -162,30 +84,6 @@ echo "Dependencies installed:"
 echo " "
 echo "jdk version:"
 javac -version
-echo " "
-echo "NodeJS version:"
-node -v
-echo " "
-echo "NPM version"
-npm -v
-echo " "
-echo "CoffeeScript version:"
-coffee -v
-echo " "
-echo "Bower version:"
-bower -v
-echo " "
-echo "Sass version:"
-sass -v
-echo " "
-echo "Redis version"
-redis-server -v
-echo " "
-echo "PostgreSQL version"
-psql --version
-echo " "
-echo "mongoDB version"
-mongod --version
 echo " "
 echo "=========================================="
 echo "Provision VM finished"
